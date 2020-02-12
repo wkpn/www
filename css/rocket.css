@@ -1,6 +1,6 @@
 *{
-	margin:0;
-	padding:0;
+	margin: 0;
+	padding: 0;
 }
 
 body{
@@ -55,5 +55,5 @@ a, a:visited {
 }
 
 a:hover{
-	border-bottom:1px dashed transparent;
+	border-bottom: 1px dashed transparent;
 }

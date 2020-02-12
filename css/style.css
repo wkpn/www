@@ -1,22 +1,22 @@
-html,body,div,span,h1,p,a,img,ul,li{
-  margin:0;
-  padding:0;
-  border:0;
-  font-size:100%;
-  font:inherit;
-  vertical-align:baseline;
+html, body, div, span, h1, p, a, img, ul, li{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
 body{
-  line-height:1;
+  line-height: 1;
 }
 
 ol,ul{
-  list-style:none;
+  list-style: none;
 }
 
 body{
-  -webkit-text-size-adjust:none
+  -webkit-text-size-adjust: none
 }
 
 *, *:before, *:after{
@@ -154,7 +154,7 @@ html{
 }
 
 #main > .inner{
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   overflow-x: hidden;position: relative;
   z-index: 1;
   padding: 3.125rem 2.5rem;
@@ -221,7 +221,8 @@ body.is-loading #main{
   width: 100%;
   max-width: 100%;
   display: inline-block;
-  width: 7rem;border-radius: 100%;
+  width: 7rem;
+  border-radius: 100%;
 }
 
 .image.flush img{
@@ -259,12 +260,13 @@ h1 .li, p .li{
 
 h1, p{
   text-transform: uppercase;
-  color: #313F47;
+  color: #313f47;
   font-family: 'Source Sans Pro';
   letter-spacing: 0.225rem;
   width: calc(100% + 0.225rem);
   font-size: 1.5em;
-  line-height: 1.875;font-weight: 200;
+  line-height: 1.875;
+  font-weight: 200;
 }
 
 hr{
@@ -337,11 +339,11 @@ hr:before{
 }
 
 #list_icons .twitter svg{
-  fill: #C8CCCF;
+  fill: #c8cccf;
 }
 
 #list_icons .twitter{
-  border: solid 1px #C8CCCF;
+  border: solid 1px #c8cccf;
 }
 
 #list_icons .twitter:hover{
@@ -353,11 +355,11 @@ hr:before{
 }
 
 #list_icons .instagram svg{
-  fill: #C8CCCF;
+  fill: #c8cccf;
 }
 
 #list_icons .instagram{
-  border: solid 1px #C8CCCF;
+  border: solid 1px #c8cccf;
 }
 
 #list_icons .instagram:hover{
@@ -369,11 +371,11 @@ hr:before{
 }
 
 #list_icons .vk svg{
-  fill: #C8CCCF;
+  fill: #c8cccf;
 }
 
 #list_icons .vk{
-  border: solid 1px #C8CCCF;
+  border: solid 1px #c8cccf;
 }
 
 #list_icons .vk:hover{
@@ -385,11 +387,11 @@ hr:before{
 }
 
 #list_icons .telegram svg{
-  fill: #C8CCCF;
+  fill: #c8cccf;
 }
 
 #list_icons .telegram{
-  border: solid 1px #C8CCCF;
+  border: solid 1px #c8cccf;
 }
 
 #list_icons .telegram:hover{
@@ -401,11 +403,11 @@ hr:before{
 }
 
 #list_icons .github svg{
-  fill: #C8CCCF;
+  fill: #c8cccf;
 }
 
 #list_icons .github{
-  border: solid 1px #C8CCCF;
+  border: solid 1px #c8cccf;
 }
 
 #list_icons .github:hover{
@@ -417,11 +419,11 @@ hr:before{
 }
 
 #list_icons .linkedin svg{
-  fill: #C8CCCF;
+  fill: #c8cccf;
 }
 
 #list_icons .linkedin{
-  border: solid 1px #C8CCCF;
+  border: solid 1px #c8cccf;
 }
 
 #list_icons .linkedin:hover{
