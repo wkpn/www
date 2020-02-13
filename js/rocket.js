@@ -15,11 +15,10 @@ $(window).on('load', function(){
 	}
 	
 	function moveRocket(){
-		$('#rocket').animate({'left': '+=100'}, 5000).delay(1000)
-					.animate({'left': '-=100'}, 5000,function(){
-				setTimeout(moveRocket, 1000);
+		$('#rocket').animate({'left': '+=100'}, 5000).delay(1000).animate({'left': '-=100'}, 5000, function(){
+            setTimeout(moveRocket, 1000);
 		});
 	}
     moveRocket();
-	animateSteam();
+    animateSteam();
 });
