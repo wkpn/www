@@ -10,10 +10,8 @@ from data import index_data, error_page_data
 def build_application():
     app = Starlette()
 
-    app.mount('/css', StaticFiles(directory='css'), name='css')
-    app.mount('/images', StaticFiles(directory='images'), name='images')
-    app.mount('/js', StaticFiles(directory='js'), name='js')
-    app.mount('/icon', StaticFiles(directory='icon'), name='icon')
+    for directory in ('css', 'images', 'js', 'icon'):
+        app.mount(f'/{directory}', StaticFiles(directory=directory), name=directory)
 
     templates = Jinja2Templates(directory='templates')
 
@@ -26,7 +24,7 @@ def build_application():
         context = {'request': request}
         context.update(index_data)
 
-        return templates.TemplateResponse(template, context)
+        return templates.TemplateResponse(name=template, context=context)
 
     @app.exception_handler(exc_class_or_status_code=404)
     async def not_found(request: Request, exc: HTTPException):
@@ -40,7 +38,7 @@ def build_application():
         }
         context.update(error_page_data)
 
-        return templates.TemplateResponse(template, context, status_code=404)
+        return templates.TemplateResponse(name=template, context=context, status_code=404)
 
     return app
 

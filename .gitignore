@@ -1,1 +1,5 @@
+# now deploying keys
 .now
+
+# locally-trusted certificate
+.cert
