@@ -30,7 +30,7 @@ uvicorn app:app --host 127.0.0.1 --port 8080 --ssl-certfile=cert.pem --ssl-keyfi
 Your application would be available at `https://127.0.0.1:8080`
 
 
-## Docker deployment as a TOR hidden service
+## Docker deployment as a TOR <a href="https://2019.www.torproject.org/docs/tor-onion-service.html.en">hidden service</a>
 ```shell
 docker build --rm -t hidden_service -f Dockerfile .
 docker run --name hidden -d hidden_service

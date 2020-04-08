@@ -25,8 +25,7 @@ def start_tor_process(config):
 
 
 def run_hidden_service(port, key_path):
-
-    tor_process = start_tor_process(tor_config_data)
+    tor_process = start_tor_process(config=tor_config_data)
 
     with Controller.from_port(port=port) as controller:
         controller.authenticate()
