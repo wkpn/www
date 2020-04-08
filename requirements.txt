@@ -1,2 +1,5 @@
 uvicorn
 starlette[full]
+
+# for running as a hidden onion service
+stem

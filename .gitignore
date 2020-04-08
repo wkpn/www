@@ -3,3 +3,6 @@
 
 # locally-trusted certificate
 .cert
+
+# hidden service key
+.hidden_service_key

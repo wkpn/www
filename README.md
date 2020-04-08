@@ -27,3 +27,12 @@ Your application would be available at `http://127.0.0.1:8080`
 uvicorn app:app --host 127.0.0.1 --port 8080 --ssl-certfile=cert.pem --ssl-keyfile=key.pem
 ```
 Your application would be available at `https://127.0.0.1:8080`
+
+
+## Docker deployment as a TOR hidden service
+```shell
+docker build --rm -t hidden_service -f Dockerfile .
+docker run --name hidden -d hidden_service
+```
+
+Your application would be available at `http://random_onion_address.onion` according to your private key
