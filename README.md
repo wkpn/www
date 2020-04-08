@@ -3,6 +3,7 @@
 ## Requirements:
 - <a href="https://github.com/encode/starlette">starlette<a>
 - <a href="https://github.com/encode/uvicorn">uvicorn</a> for local deploying and testing
+- <a href="https://stem.torproject.org/"stem</a> for deploying as a TOR hidden service
 
 ## Install requirements:
 ```shell
