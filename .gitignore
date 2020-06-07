@@ -1,8 +1,11 @@
 # now deploying keys
-.now
+.now/
 
 # locally-trusted certificate
-.cert
+.cert/
 
 # hidden service key
-.hidden_service_key
+.hidden_service_key/
+
+# other
+.mypy_cache/
