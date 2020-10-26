@@ -1,11 +1,9 @@
-# now deploying keys
-.now/
+# vercel deploying keys
+.vercel/
 
 # locally-trusted certificate
 .cert/
 
-# hidden service key
-.hidden_service_key/
-
 # other
 .mypy_cache/
+icons.html

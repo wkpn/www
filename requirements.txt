@@ -1,5 +1,5 @@
-uvicorn
+httpx[http2]
 starlette[full]
 
-# for running as a hidden onion service
-stem
+# for a local run
+# uvicorn
