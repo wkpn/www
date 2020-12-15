@@ -1,14 +1,10 @@
-var on = addEventListener,
+let on = addEventListener,
     $ = function(q) {
         return document.querySelector(q)
     },
-    $$ = function(q) {
-        return document.querySelectorAll(q)
-    },
     $body = document.body,
-    $inner = $('.inner'),
     client = (function() {
-        var o = {
+        let o = {
                 browser: 'other',
                 browserVersion: 0,
                 os: 'other',
@@ -17,10 +13,10 @@ var on = addEventListener,
             ua = navigator.userAgent,
             a, i;
         a = [
-            ['firefox', /Firefox\/([0-9\.]+)/],
-            ['edge', /Edge\/([0-9\.]+)/],
-            ['safari', /Version\/([0-9\.]+).+Safari/],
-            ['chrome', /Chrome\/([0-9\.]+)/],
+            ['firefox', /Firefox\/([0-9.]+)/],
+            ['edge', /Edge\/([0-9.]+)/],
+            ['safari', /Version\/([0-9.]+).+Safari/],
+            ['chrome', /Chrome\/([0-9.]+)/],
             ['ie', /Trident\/.+rv:([0-9]+)/]
         ];
         for (i = 0; i < a.length; i++) {
@@ -37,11 +33,11 @@ var on = addEventListener,
             ['ios', /CPU like Mac OS X/, function(v) {
                 return 0
             }],
-            ['android', /Android ([0-9\.]+)/, null],
+            ['android', /Android ([0-9.]+)/, null],
             ['mac', /Macintosh.+Mac OS X ([0-9_]+)/, function(v) {
                 return v.replace('_', '.').replace('_', '');
             }],
-            ['windows', /Windows NT ([0-9\.]+)/, null]
+            ['windows', /Windows NT ([0-9.]+)/, null]
         ];
         for (i = 0; i < a.length; i++) {
             if (ua.match(a[i][1])) {
@@ -51,14 +47,8 @@ var on = addEventListener,
             }
         }
         return o;
-    }()),
-    trigger = function(t) {
-        if (client.browser == 'ie') {
-            var e = document.createEvent('Event');
-            e.initEvent(t, false, true);
-            dispatchEvent(e);
-        } else dispatchEvent(new Event(t));
-    };
+    }());
+
 on('load', function() {
     setTimeout(function() {
         $body.className = $body.className.replace(/\bis-loading\b/, 'is-playing');
@@ -67,24 +57,26 @@ on('load', function() {
         }, 1250);
     }, 100);
 });
-var style, sheet, rule;
-style = document.createElement('style');
+
+let style = document.createElement('style');
+let sheet = style.sheet;
+let rule;
+
 style.appendChild(document.createTextNode(''));
 document.head.appendChild(style);
-sheet = style.sheet;
 
-if (client.os == 'android') {
+if (client.os === 'android') {
     (function() {
         sheet.insertRule('body::after { }', 0);
         rule = sheet.cssRules[0];
-        var f = function() {
+        let f = function() {
             rule.style.cssText = 'height: ' + (Math.max(screen.width, screen.height)) + 'px';
         };
         on('load', f);
         on('orientationchange', f);
         on('touchmove', f);
     })();
-} else if (client.os == 'ios') {
+} else if (client.os === 'ios') {
     (function() {
         sheet.insertRule('body::after { }', 0);
         rule = sheet.cssRules[0];
@@ -101,11 +93,11 @@ if (client.os == 'android') {
             $body.classList.remove('ios-focus-fix');
         }, true);
     })();
-} else if (client.browser == 'ie') {
+} else if (client.browser === 'ie') {
     (function() {
-        var t, f;
+        let t, f;
         f = function() {
-            var x = $('#wrapper');
+            let x = $('#wrapper');
             x.style.height = 'auto';
             if (x.scrollHeight <= innerHeight) x.style.height = '100vh';
         };

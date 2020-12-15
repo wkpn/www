@@ -338,60 +338,12 @@ hr:before{
     height: 60%;
 }
 
-#list_icons .twitter svg{
-    fill: #c8cccf;
-}
-
-#list_icons .twitter{
+#list_icons .telegram{
     border: solid 1px #c8cccf;
-}
-
-#list_icons .twitter:hover{
-    border-color: #1da1f3;
-}
-
-#list_icons .twitter:hover svg{
-    fill: #1da1f3;
-}
-
-#list_icons .instagram svg{
-    fill: #c8cccf;
-}
-
-#list_icons .instagram{
-    border: solid 1px #c8cccf;
-}
-
-#list_icons .instagram:hover{
-    border-color: #272727;
-}
-
-#list_icons .instagram:hover svg{
-    fill: #272727;
-}
-
-#list_icons .vk svg{
-    fill: #c8cccf;
-}
-
-#list_icons .vk{
-    border: solid 1px #c8cccf;
-}
-
-#list_icons .vk:hover{
-    border-color: #507299;
-}
-
-#list_icons .vk:hover svg{
-    fill: #507299;
 }
 
 #list_icons .telegram svg{
     fill: #c8cccf;
-}
-
-#list_icons .telegram{
-    border: solid 1px #c8cccf;
 }
 
 #list_icons .telegram:hover{
@@ -402,12 +354,12 @@ hr:before{
     fill: #2096d4;
 }
 
-#list_icons .github svg{
-    fill: #c8cccf;
-}
-
 #list_icons .github{
     border: solid 1px #c8cccf;
+}
+
+#list_icons .github svg{
+    fill: #c8cccf;
 }
 
 #list_icons .github:hover{
@@ -418,12 +370,12 @@ hr:before{
     fill: #24292e;
 }
 
-#list_icons .linkedin svg{
-    fill: #c8cccf;
-}
-
 #list_icons .linkedin{
     border: solid 1px #c8cccf;
+}
+
+#list_icons .linkedin svg{
+    fill: #c8cccf;
 }
 
 #list_icons .linkedin:hover{
@@ -432,6 +384,22 @@ hr:before{
 
 #list_icons .linkedin:hover svg{
     fill: #0076b5;
+}
+
+#list_icons .signal{
+    border: solid 1px #c8cccf;
+}
+
+#list_icons .signal svg{
+    fill: #c8cccf;
+}
+
+#list_icons .signal:hover{
+    border-color: #4679e8;
+}
+
+#list_icons .signal:hover svg{
+    fill: #4679e8;
 }
 
 @media (max-width: 1680px){

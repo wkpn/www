@@ -16,28 +16,28 @@ from typing import Dict, Union
 import hashlib
 import hmac
 import json
-import os
+import sys
 
 
-index_data = {
+index_data: Dict[str, str] = {
     "title": "why'",
     "name": "Egor Nosov",
-    "position": "Software Engineer at EPAM Systems",
+    "description": "Software Engineer at EPAM Systems",
     "image": "/images/avatar.jpg"
 }
 
 
 def build_application() -> Starlette:
-    config = Config()
+    config: Config = Config()
 
-    bot = config("TG_BOT")
-    bot_token = config("BOT_TOKEN")
-    secret_key = config("SECRET_KEY")
-    tg_id = config("TG_ID", cast=int)
+    secret_key: str = config("SECRET_KEY")
+    tg_bot_token: str = config("TG_BOT_TOKEN")
+    tg_bot_username: str = config("TG_BOT_USERNAME")
+    tg_user_id: int = config("TG_USER_ID", cast=int)
 
-    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+    url: str = f"https://api.telegram.org/bot{tg_bot_token}/sendMessage"
 
-    templates = Jinja2Templates(directory="templates")
+    templates: Jinja2Templates = Jinja2Templates(directory="api/templates")
 
     def _check_hash(data: Dict[str, Union[str, int]], bot_token: str) -> bool:
         telegram_hash = data.pop("hash", None)
@@ -70,6 +70,15 @@ def build_application() -> Starlette:
     async def error(request: Request, exc: HTTPException) -> RedirectResponse:
         return RedirectResponse(url="/")
 
+    async def info(request: Request):
+        user_host = request.client.host
+        user_port = request.client.port
+
+        sys_version = sys.version
+
+        return PlainTextResponse(f"{user_host}:{user_port}\n"
+                                 f"{sys_version}")
+
     async def telegram(request: Request) -> templates.TemplateResponse:
         telegram_user = request.session.get("telegram_user")
         template = "telegram.html"
@@ -84,7 +93,7 @@ def build_application() -> Starlette:
             context = {
                 "request": request,
                 "button": True,
-                "bot": bot
+                "tg_bot_username": tg_bot_username
             }
         return templates.TemplateResponse(name=template, context=context)
 
@@ -92,7 +101,7 @@ def build_application() -> Starlette:
         params = request.query_params
 
         _dict = params._dict
-        _check = _check_hash(_dict, bot_token)
+        _check = _check_hash(_dict, tg_bot_token)
 
         if not _check:
             return PlainTextResponse("Invalid checksum")
@@ -121,7 +130,7 @@ def build_application() -> Starlette:
 
             background = BackgroundTask(_telegram_send,
                                         client=request.app.state.client,
-                                        chat_id=tg_id,
+                                        chat_id=tg_user_id,
                                         text=f"Auth: {json.dumps(session_data)}")
 
         return RedirectResponse(url="/telegram", background=background)
@@ -131,19 +140,13 @@ def build_application() -> Starlette:
         telegram_message = req_form["message"]
 
         telegram_user = request.session.get("telegram_user")
-        telegram_username = telegram_user["username"]
-        telegram_id = telegram_user["user_id"]
 
-        if telegram_username:
-            sender = f"@{telegram_username}"
-        else:
-            sender = telegram_id
+        sender = f"@{telegram_user['username']}" or telegram_user["user_id"]
 
         background = BackgroundTask(_telegram_send,
                                     client=request.app.state.client,
-                                    chat_id=tg_id,
-                                    text=f"New message:\n\n"
-                                         f"From: {sender}\n"
+                                    chat_id=tg_user_id,
+                                    text=f"From: {sender}\n"
                                          f"Text: {telegram_message}")
 
         return PlainTextResponse("Message sent!", background=background)
@@ -155,7 +158,7 @@ def build_application() -> Starlette:
         if telegram_user:
             background = BackgroundTask(_telegram_send,
                                         client=request.app.state.client,
-                                        chat_id=tg_id,
+                                        chat_id=tg_user_id,
                                         text=f"Logout: {json.dumps(telegram_user)}"
                                         )
 
@@ -166,7 +169,9 @@ def build_application() -> Starlette:
     routes = [
         # top-level index
         Route("/", index, methods=["GET"]),
+        Route("/info", info, methods=["GET"]),
 
+        # telegram routes
         Mount("/telegram", routes=[
             Route("/", telegram, methods=["GET"]),
             Route("/auth", telegram_auth, methods=["GET"]),
@@ -175,18 +180,18 @@ def build_application() -> Starlette:
         ]),
 
         # static stuff
-        Mount("/css", StaticFiles(directory=os.path.realpath("css")), name="css"),
-        Mount("/icon", StaticFiles(directory=os.path.realpath("icon")), name="icon"),
-        Mount("/images", StaticFiles(directory=os.path.realpath("images")), name="images"),
-        Mount("/js", StaticFiles(directory=os.path.realpath("js")), name="js")
+        Mount("/css", StaticFiles(directory="api/css"), name="css"),
+        Mount("/icon", StaticFiles(directory="api/icon"), name="icon"),
+        Mount("/images", StaticFiles(directory="api/images"), name="images"),
+        Mount("/js", StaticFiles(directory="api/js"), name="js")
     ]
 
     exception_handlers = {404: error}
     middleware = [Middleware(SessionMiddleware, secret_key=secret_key)]
 
-    app = Starlette(routes=routes,
-                    middleware=middleware,
-                    exception_handlers=exception_handlers)
+    app: Starlette = Starlette(routes=routes,
+                               middleware=middleware,
+                               exception_handlers=exception_handlers)
 
     app.state.client = AsyncClient(http2=True)
 
