@@ -28,7 +28,7 @@ index_data: Dict[str, str] = {
 
 
 def build_application() -> Starlette:
-    config: Config = Config()
+    config: Config = Config("api/.env")
 
     secret_key: str = config("SECRET_KEY")
     tg_bot_token: str = config("TG_BOT_TOKEN")

@@ -1,4 +1,4 @@
-# Single-page personal profile
+# Single-page personal website
 
 ## Requirements:
 - <a href="https://github.com/encode/starlette">starlette<a>
@@ -17,12 +17,18 @@ vercel --prod
 
 ## Local deployment:
 ```shell
-uvicorn app:app --host 127.0.0.1 --port 8080
+uvicorn api.app:app --host 127.0.0.1 --port 8080
 ```
 Your application will be available at `http://127.0.0.1:8080`
 
 ## Local deployment with a locally-trusted certificate (e.g. from a <a href="https://github.com/FiloSottile/mkcert">mkcert</a>):
 ```shell 
-uvicorn app:app --host 127.0.0.1 --port 8080 --ssl-certfile=cert.pem --ssl-keyfile=key.pem
+uvicorn api.app:app --host 127.0.0.1 --port 8080 --ssl-certfile=cert.pem --ssl-keyfile=key.pem
 ```
 Your application will be available at `https://127.0.0.1:8080`
+
+## Local deployment with Vercel:
+```shell
+vercel dev
+```
+Your application will be available at `http://127.0.0.1:3000`
