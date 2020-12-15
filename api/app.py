@@ -16,7 +16,6 @@ from typing import Dict, Union
 import hashlib
 import hmac
 import json
-import sys
 
 
 index_data: Dict[str, str] = {
@@ -53,7 +52,7 @@ def build_application() -> Starlette:
             return True
         return False
 
-    async def _telegram_send(client: AsyncClient, chat_id: int, text: str):
+    async def _telegram_send(client: AsyncClient, chat_id: int, text: str) -> None:
         await client.post(url=url, json={
             "chat_id": chat_id,
             "text": text
@@ -70,14 +69,8 @@ def build_application() -> Starlette:
     async def error(request: Request, exc: HTTPException) -> RedirectResponse:
         return RedirectResponse(url="/")
 
-    async def info(request: Request):
-        user_host = request.client.host
-        user_port = request.client.port
-
-        sys_version = sys.version
-
-        return PlainTextResponse(f"{user_host}:{user_port}\n"
-                                 f"{sys_version}")
+    async def ip(request: Request) -> PlainTextResponse:
+        return PlainTextResponse(request.client.host)
 
     async def telegram(request: Request) -> templates.TemplateResponse:
         telegram_user = request.session.get("telegram_user")
@@ -135,13 +128,15 @@ def build_application() -> Starlette:
 
         return RedirectResponse(url="/telegram", background=background)
 
-    async def telegram_form(request: Request):
+    async def telegram_form(request: Request) -> PlainTextResponse:
         req_form = await request.form()
         telegram_message = req_form["message"]
 
         telegram_user = request.session.get("telegram_user")
 
-        sender = f"@{telegram_user['username']}" or telegram_user["user_id"]
+        sender = telegram_user["user_id"]
+        if telegram_user["username"]:
+            sender = f"@{telegram_user['username']}"
 
         background = BackgroundTask(_telegram_send,
                                     client=request.app.state.client,
@@ -161,7 +156,6 @@ def build_application() -> Starlette:
                                         chat_id=tg_user_id,
                                         text=f"Logout: {json.dumps(telegram_user)}"
                                         )
-
             request.session.pop("telegram_user", None)
 
         return RedirectResponse(url="/telegram", background=background)
@@ -169,7 +163,9 @@ def build_application() -> Starlette:
     routes = [
         # top-level index
         Route("/", index, methods=["GET"]),
-        Route("/info", info, methods=["GET"]),
+
+        # user ip info
+        Route("/ip", ip, methods=["GET"]),
 
         # telegram routes
         Mount("/telegram", routes=[
