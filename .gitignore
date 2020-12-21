@@ -5,6 +5,5 @@
 .cert/
 
 # other
-api/.env
 .mypy_cache/
-icons.html
+api/.env

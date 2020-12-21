@@ -7,12 +7,6 @@ from starlette.staticfiles import StaticFiles
 from typing import Callable, Dict, List
 
 from .settings import secret_key, BASE_DIR
-from .telegram_views import (
-    telegram,
-    telegram_auth,
-    telegram_form,
-    telegram_logout
-)
 from .views import error, index, ip
 
 
@@ -23,14 +17,6 @@ def build_application() -> Starlette:
 
         # ip info
         Route("/ip", ip, methods=["GET"]),
-
-        # telegram views
-        Mount("/telegram", routes=[
-            Route("/", telegram, methods=["GET"]),
-            Route("/auth", telegram_auth, methods=["GET"]),
-            Route("/form", telegram_form, methods=["POST"]),
-            Route("/logout", telegram_logout, methods=["GET"])
-        ]),
 
         # static stuff
         Mount("/css", StaticFiles(directory=f"{BASE_DIR}/css"), name="css"),

@@ -1,29 +1,41 @@
 from httpx import AsyncClient
-from typing import Dict, Union
+from typing import Any
 
-from .settings import url
-
-import hashlib
-import hmac
+from .settings import ip_info_token, ip_info_url, tg_bot_url
 
 
-def check_hash(data: Dict[str, Union[str, int]], bot_token: str) -> bool:
-    telegram_hash = data.pop("hash", None)
+async def get_ip_info(client: AsyncClient,
+                      chat_id: int,
+                      ip_address: str,
+                      user_agent: str) -> None:
+    url = f"{ip_info_url}/{ip_address}?token={ip_info_token}"
 
-    alphabetical_order = sorted(data.items(), key=lambda x: x[0])
+    response = await client.get(url)
+    response = response.json()
 
-    result = "\n".join(f"{k[0]}={k[1]}" for k in alphabetical_order)
+    ip_data = {
+        "IP": ip_address,
+        "Country": response.get("country", None),
+        "Location": response.get("loc", None),
+        "Region": response.get("region", None),
+        "City": response.get("city", None),
+        "Organization": response.get("org", None),
+        "Postal": response.get("postal", None),
+        "User-Agent": user_agent,
+    }
 
-    key = hashlib.sha256(bot_token.encode()).digest()
-    computed_hash = hmac.new(key, msg=result.encode(), digestmod=hashlib.sha256).hexdigest()
+    text = "\n".join(f"<b>{key}</b>: {value}" for key, value in ip_data.items() if value is not None)
 
-    if telegram_hash == computed_hash:
-        return True
-    return False
+    await telegram_send(
+        client, chat_id, text,
+        disable_web_page_preview=True,
+        parse_mode="HTML"
+    )
 
 
-async def telegram_send(client: AsyncClient, chat_id: int, text: str) -> None:
-    await client.post(url=url, json={
+async def telegram_send(client: AsyncClient, chat_id: int, text: str, **kwargs: Any) -> None:
+    await client.post(url=tg_bot_url, json={
         "chat_id": chat_id,
-        "text": text
+        "text": text,
+        **kwargs
     })
