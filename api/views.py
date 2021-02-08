@@ -21,10 +21,9 @@ async def index(request: Request) -> templates.TemplateResponse:
 
     background = BackgroundTask(
         get_ip_info,
-        client=request.app.state.client,
         chat_id=tg_channel_id,
         ip_address=ip_address,
-        user_agent=user_agent,
+        user_agent=user_agent
     )
 
     return templates.TemplateResponse(
