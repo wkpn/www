@@ -1,0 +1,96 @@
+==================================================================
+https://keybase.io/wkpn
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://wkpn.me
+  * I am wkpn (https://keybase.io/wkpn) on keybase.
+  * I have a public key with fingerprint 38F9 AF07 1A46 BB04 51FE  1E08 97C6 C42B 4141 74F7
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0101448ac98fd8755a1c4380afaeb1ac79c8e0a52987072c2ad3fdda2ff1b03545f20a",
+      "fingerprint": "38f9af071a46bb0451fe1e0897c6c42b414174f7",
+      "host": "keybase.io",
+      "key_id": "97c6c42b414174f7",
+      "kid": "0101448ac98fd8755a1c4380afaeb1ac79c8e0a52987072c2ad3fdda2ff1b03545f20a",
+      "uid": "e18cc822c34e3be9aef347209a030519",
+      "username": "wkpn"
+    },
+    "merkle_root": {
+      "ctime": 1613168606,
+      "hash_meta": "aced291dce27f35f1e6749d3422087361dadee76c00f7e717a8d95e778998c90",
+      "seqno": 19096463
+    },
+    "revoke": {
+      "sig_ids": [
+        "bd65f0afa97dedb74341ba5fedd084623261d9253c47fcd1a24cb27bb9949a5a0f"
+      ]
+    },
+    "service": {
+      "hostname": "wkpn.me",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1613168613,
+  "expire_in": 157680000,
+  "prev": "84b335b759e26487979152e183461526ba1e2892a595e3c2216b7370746d70a9",
+  "seqno": 28,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+
+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
+=NW/q
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/wkpn
+
+==================================================================

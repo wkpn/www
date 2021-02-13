@@ -1,7 +1,7 @@
 from starlette.background import BackgroundTask
 from starlette.exceptions import HTTPException
 from starlette.requests import Request
-from starlette.responses import PlainTextResponse, RedirectResponse
+from starlette.responses import RedirectResponse
 
 from .helpers import get_ip_info
 from .resources import index_data, templates
@@ -29,7 +29,3 @@ async def index(request: Request) -> templates.TemplateResponse:
     return templates.TemplateResponse(
         name=template, context=context, background=background
     )
-
-
-async def ip(request: Request) -> PlainTextResponse:
-    return PlainTextResponse(request.client.host)

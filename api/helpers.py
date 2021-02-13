@@ -1,5 +1,5 @@
 from httpx import AsyncClient
-from typing import Any, Optional
+from typing import Optional
 
 from .settings import ip_info_token, ip_info_url, tg_bot_url
 
@@ -28,19 +28,12 @@ async def get_ip_info(
             f"<b>{k}</b>: {v}" for k, v in ip_data.items() if v is not None
         )
 
-        await _telegram_send(
-            client,
-            chat_id,
-            text,
-            disable_web_page_preview=True,
-            parse_mode="HTML"
+        await client.post(
+            url=tg_bot_url,
+            json={
+                "chat_id": chat_id,
+                "text": text,
+                "disable_web_page_preview": True,
+                "parse_mode": "HTML"
+            }
         )
-
-
-async def _telegram_send(
-    client: AsyncClient, chat_id: int, text: str, **kwargs: Any
-) -> None:
-    await client.post(
-        url=tg_bot_url,
-        json={"chat_id": chat_id, "text": text, **kwargs}
-    )

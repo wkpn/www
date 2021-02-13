@@ -1,15 +1,18 @@
+from starlette.responses import FileResponse
 from starlette.routing import Mount, Route
 from starlette.staticfiles import StaticFiles
 
 from .settings import BASE_DIR
-from .views import index, ip
+from .views import index
 
 
 routes = [
     # top-level index
     Route("/", index, methods=["GET"]),
-    # ip info
-    Route("/ip", ip, methods=["GET"]),
+
+    # keybase proof
+    Route("/keybase.txt", FileResponse(f"{BASE_DIR}/files/keybase.txt"), methods=["GET"]),
+
     # static stuff
     Mount("/css", StaticFiles(directory=f"{BASE_DIR}/css"), name="css"),
     Mount("/icon", StaticFiles(directory=f"{BASE_DIR}/icon"), name="icon"),
