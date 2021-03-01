@@ -5,7 +5,7 @@ from starlette.responses import RedirectResponse
 
 from .helpers import get_ip_info
 from .resources import index_data, templates
-from .settings import tg_channel_id
+from .settings import tg_channel_id, DEBUG
 
 
 async def error(request: Request, exc: HTTPException) -> RedirectResponse:
@@ -24,7 +24,7 @@ async def index(request: Request) -> templates.TemplateResponse:
         chat_id=tg_channel_id,
         ip_address=ip_address,
         user_agent=user_agent
-    )
+    ) if not DEBUG else None
 
     return templates.TemplateResponse(
         name=template, context=context, background=background

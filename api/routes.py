@@ -11,11 +11,15 @@ routes = [
     Route("/", index, methods=["GET"]),
 
     # keybase proof
-    Route("/keybase.txt", FileResponse(f"{BASE_DIR}/files/keybase.txt"), methods=["GET"]),
+    Route(
+        "/keybase.txt",
+        FileResponse(f"{BASE_DIR}/files/keybase.txt"),
+        methods=["GET"]
+    ),
 
     # static stuff
-    Mount("/css", StaticFiles(directory=f"{BASE_DIR}/css"), name="css"),
-    Mount("/icon", StaticFiles(directory=f"{BASE_DIR}/icon"), name="icon"),
-    Mount("/images", StaticFiles(directory=f"{BASE_DIR}/images"), name="images"),
-    Mount("/js", StaticFiles(directory=f"{BASE_DIR}/js"), name="js")
+    Mount("/css", StaticFiles(directory=f"{BASE_DIR}/css")),
+    Mount("/icon", StaticFiles(directory=f"{BASE_DIR}/icon")),
+    Mount("/images", StaticFiles(directory=f"{BASE_DIR}/images")),
+    Mount("/js", StaticFiles(directory=f"{BASE_DIR}/js"))
 ]
