@@ -1,4 +1,4 @@
-# Single-page personal website
+# Source code for https://wkpn.me
 
 ## Requirements:
 - <a href="https://github.com/encode/starlette">starlette<a>
@@ -19,16 +19,16 @@ vercel --prod
 ```shell
 uvicorn api.app:app --host 127.0.0.1 --port 8080
 ```
-Your application will be available at `http://127.0.0.1:8080`
+Website will be available at `http://127.0.0.1:8080`
 
 ## Local deployment with a locally-trusted certificate (e.g. from a <a href="https://github.com/FiloSottile/mkcert">mkcert</a>):
 ```shell 
 uvicorn api.app:app --host 127.0.0.1 --port 8080 --ssl-certfile=cert.pem --ssl-keyfile=key.pem
 ```
-Your application will be available at `https://127.0.0.1:8080`
+Website will be available at `https://127.0.0.1:8080`
 
 ## Local deployment with Vercel:
 ```shell
 vercel dev
 ```
-Your application will be available at `http://127.0.0.1:3000`
+Website will be available at `http://127.0.0.1:3000`

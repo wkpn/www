@@ -1,7 +1,12 @@
 from httpx import AsyncClient
-from typing import Optional
+from typing import Any, Dict, Optional
 
-from .settings import ip_info_token, ip_info_url, tg_bot_url
+from .settings import (
+    ip_info_token,
+    ip_info_url,
+    organizations,
+    tg_bot_url
+)
 
 
 async def get_ip_info(
@@ -13,27 +18,49 @@ async def get_ip_info(
         response = await client.get(url)
         response = response.json()
 
+        country = response.get("country", None)
+        organization = response.get("org", None)
+
         ip_data = {
             "IP": ip_address,
-            "Country": response.get("country", None),
+            "Country": country,
             "Location": response.get("loc", None),
             "Region": response.get("region", None),
             "City": response.get("city", None),
-            "Organization": response.get("org", None),
+            "Organization": organization,
             "Postal": response.get("postal", None),
             "User-Agent": user_agent
         }
 
         text = "\n".join(
-            f"<b>{k}</b>: {v}" for k, v in ip_data.items() if v is not None
+            f"<b>{k}</b>: {v}" for k, v in ip_data.items() if v
         )
 
-        await client.post(
-            url=tg_bot_url,
-            json={
-                "chat_id": chat_id,
-                "text": text,
-                "disable_web_page_preview": True,
-                "parse_mode": "HTML"
-            }
+        message = await _tg_post(
+            client,
+            "sendMessage",
+            chat_id=chat_id,
+            text=text,
+            disable_web_page_preview=True,
+            parse_mode="HTML"
         )
+
+        message_id = message["message_id"]
+
+        if country == "RU" and organization not in organizations:
+            await _tg_post(
+                client,
+                "pinChatMessage",
+                chat_id=chat_id,
+                message_id=message_id
+            )
+
+
+async def _tg_post(
+    client: AsyncClient, method: str, **kwargs: Any
+) -> Dict[str, Any]:
+    response = await client.post(
+        url=f"{tg_bot_url}/{method}",
+        json=kwargs
+    )
+    return response.json()["result"]

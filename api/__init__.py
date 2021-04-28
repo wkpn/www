@@ -1,5 +1,5 @@
 __author__ = "wkpn"
 __license__ = "MIT"
-__title__ = "Simple single-page personal website"
-__url__ = "https://github.com/wkpn/website"
-__version__ = "1.3.0"
+__title__ = "Source code for https://wkpn.me"
+__url__ = "https://github.com/wkpn/www"
+__version__ = "1.4.0"
