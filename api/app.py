@@ -5,12 +5,10 @@ from .views import error
 
 
 def build_application() -> Starlette:
-    app = Starlette(
+    return Starlette(
         routes=routes,
         exception_handlers={404: error}
     )
-
-    return app
 
 
 app = build_application()

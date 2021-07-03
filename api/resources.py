@@ -8,7 +8,7 @@ index_data: Dict[str, str] = {
     "title": "wkpn",
     "name": "Egor D.",
     "description": "Software Engineer at EPAM Systems",
-    "image": "/images/avatar.jpg",
+    "image": "/images/profile.jpg",
     # urls
     "github_url": "https://github.com/wkpn",
     "telegram_url": "https://t.me/wkpnbot",

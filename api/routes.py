@@ -7,7 +7,7 @@ from .views import index
 
 
 routes = [
-    # top-level index
+    # main page
     Route("/", index, methods=["GET"]),
 
     # keybase proof
