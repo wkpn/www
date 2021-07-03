@@ -1,8 +1,9 @@
 # Source code for https://wkpn.me
 
 ## Requirements:
+- <a href="https://github.com/aio-libs/aiohttp">aiohttp</a>
 - <a href="https://github.com/encode/starlette">starlette<a>
-- <a href="https://github.com/encode/uvicorn">uvicorn</a> for local deploying and testing
+- <a href="https://github.com/encode/uvicorn">uvicorn</a> (for local deploying and testing)
 
 ## Install requirements:
 ```shell
