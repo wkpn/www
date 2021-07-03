@@ -1,5 +1,6 @@
-httpx[http2]
-starlette[full]
+aiohttp
+jinja2
+starlette
 
 # for a local run
 # uvicorn

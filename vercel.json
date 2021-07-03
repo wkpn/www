@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/app.py": {
-      "runtime": "@mariasoul/python3.8@1.1.4"
+      "runtime": "@vercel/python@2.0.4"
     }
   },
   "routes": [
