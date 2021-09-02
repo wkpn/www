@@ -7,12 +7,12 @@ from .settings import BASE_DIR
 index_data: Dict[str, str] = {
     "title": "wkpn",
     "name": "Egor D.",
-    "description": "Software Engineer at EPAM Systems",
-    "image": "/images/profile.jpg",
+    "description": "Software Engineer",
+    "image": "/images/profile_2.jpg",
     # urls
     "github_url": "https://github.com/wkpn",
     "telegram_url": "https://t.me/wkpnbot",
-    "linkedin_url": "https://www.linkedin.com/in/whyapostrophe",
+    "linkedin_url": "https://www.linkedin.com/in/wkpn",
     "signal_number": "tel:+1-562-352-0058"
 }
 
