@@ -1,7 +1,7 @@
 # Source code for https://wkpn.me
 
 ## Requirements:
-- <a href="https://github.com/aio-libs/aiohttp">aiohttp</a>
+- <a href="https://github.com/encode/httpx">httpx</a>
 - <a href="https://github.com/encode/starlette">starlette<a>
 
 ## Install requirements:

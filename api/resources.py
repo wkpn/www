@@ -7,7 +7,7 @@ from .settings import BASE_DIR
 index_data: Dict[str, str] = {
     "title": "wkpn",
     "name": "Egor D.",
-    "description": "Software Engineer",
+    "description": "Software Engineer at Apple",
     "image": "/images/profile_2.jpg",
     # urls
     "github_url": "https://github.com/wkpn",

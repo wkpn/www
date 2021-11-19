@@ -1,4 +1,4 @@
-from aiohttp import ClientSession
+from httpx import AsyncClient
 from typing import Any, Dict, Optional, Tuple
 
 from .settings import (
@@ -16,15 +16,14 @@ async def get_ip_info(
 ) -> None:
     url = f"{ip_info_url}/{ip_address}?token={ip_info_token}"
 
-    async with ClientSession() as session:
-        async with session.get(url) as response:
-            response = await response.json()
+    async with AsyncClient(http2=True) as client:
+        response = (await client.get(url)).json()
 
         country, text, organization = _prepare_message_text(
             ip_address, response, user_agent
         )
         message = await _tg_post(
-            session,
+            client,
             "sendMessage",
             chat_id=chat_id,
             text=text,
@@ -37,7 +36,7 @@ async def get_ip_info(
         if country == "RU":
             if not any(org in organization for org in organizations):
                 await _tg_post(
-                    session,
+                    client,
                     "pinChatMessage",
                     chat_id=chat_id,
                     message_id=message_id
@@ -70,10 +69,13 @@ def _prepare_message_text(
 
 
 async def _tg_post(
-    session: ClientSession, method: str, **kwargs: Any
+    client: AsyncClient, method: str, **kwargs: Any
 ) -> Dict[str, Any]:
-    async with session.post(
-        url=f"{tg_bot_url}/{method}",
-        json=kwargs
-    ) as response:
-        return (await response.json())["result"]
+    response = (
+        await client.post(
+            url=f"{tg_bot_url}/{method}",
+            json=kwargs
+        )
+    ).json()
+
+    return response["result"]
