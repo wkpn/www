@@ -31,10 +31,10 @@ async def get_ip_info(
             parse_mode="HTML"
         )
 
-        message_id = message["message_id"]
-
-        if country == "RU":
+        if country in ("PL", "RU"):
             if not any(org in organization for org in organizations):
+                message_id = message["message_id"]
+
                 await _tg_post(
                     client,
                     "pinChatMessage",
