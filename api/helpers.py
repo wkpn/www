@@ -2,6 +2,7 @@ from httpx import AsyncClient
 from typing import Any, Dict, Optional, Tuple
 
 from .settings import (
+    countries,
     ip_info_token,
     ip_info_url,
     organizations,
@@ -10,9 +11,7 @@ from .settings import (
 
 
 async def get_ip_info(
-    chat_id: int,
-    ip_address: str,
-    user_agent: Optional[str] = None
+    chat_id: int, ip_address: str,user_agent: Optional[str] = None
 ) -> None:
     url = f"{ip_info_url}/{ip_address}?token={ip_info_token}"
 
@@ -31,7 +30,7 @@ async def get_ip_info(
             parse_mode="HTML"
         )
 
-        if country in ("PL", "RU"):
+        if country in countries:
             if not any(org in organization for org in organizations):
                 message_id = message["message_id"]
 
@@ -44,9 +43,7 @@ async def get_ip_info(
 
 
 def _prepare_message_text(
-    ip_address: str,
-    response: Dict[str, Any],
-    user_agent: Optional[str] = None,
+    ip_address: str, response: Dict[str, Any], user_agent: Optional[str] = None,
 ) -> Tuple[str, str, str]:
     country = response.get("country", None)
     organization = response.get("org", None)

@@ -1,11 +1,12 @@
 from starlette.routing import Mount, Route
 from starlette.staticfiles import StaticFiles
+from typing import List, Union
 
 from .settings import BASE_DIR
 from .views import index
 
 
-routes = [
+routes: List[Union[Route, Mount]] = [
     # main page
     Route("/", index, methods=["GET"]),
 

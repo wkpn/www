@@ -1,15 +1,8 @@
-# vercel deploying keys
+# deployment
 .vercel/
 
-# locally-trusted certificate
-.cert/
-
 # other
-.idea/
-.mypy_cache/
 api/.env
-tests/
-
 LICENSE
 README.md
 vercel.json

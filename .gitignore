@@ -1,9 +1,6 @@
-# vercel deploying keys
+# deployment
 .vercel/
 
-# locally-trusted certificate
-.cert/
-
 # other
-.mypy_cache/
+.venv/
 api/.env

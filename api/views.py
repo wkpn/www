@@ -7,7 +7,7 @@ from .settings import tg_channel_id, DEBUG
 
 
 async def index(request: Request) -> templates.TemplateResponse:
-    template = "index.html"
+    template_name = "index.html"
     context = {"request": request, **index_data}
 
     ip_address = request.client.host
@@ -21,5 +21,5 @@ async def index(request: Request) -> templates.TemplateResponse:
     ) if not DEBUG else None
 
     return templates.TemplateResponse(
-        name=template, context=context, background=background
+        name=template_name, context=context, background=background
     )
