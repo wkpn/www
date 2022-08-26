@@ -11,7 +11,7 @@ from .settings import (
 
 
 async def get_ip_info(
-    chat_id: int, ip_address: str,user_agent: Optional[str] = None
+    chat_id: int, ip_address: str, user_agent: Optional[str] = None
 ) -> None:
     url = f"{ip_info_url}/{ip_address}?token={ip_info_token}"
 

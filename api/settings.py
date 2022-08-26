@@ -25,9 +25,9 @@ countries: Tuple[str, ...] = (
 )
 
 organizations: Tuple[str, ...] = (
-    "AS47764",   # mail.ru
-    "AS13238",   # yandex.ru
-    "AS208722",  # Global DC Oy (yandex.ru)
+    "AS47764",   # LLC VK
+    "AS13238",   # YANDEX LLC
+    "AS208722",  # Global DC Oy
 )
 
 tg_bot_url: str = f"https://api.telegram.org/bot{tg_bot_token}"
